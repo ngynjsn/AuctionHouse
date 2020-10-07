@@ -17,3 +17,14 @@ of buy out offers to purchase the item.
 of having to choose who to sell it to, an auction house would be fun and maximizes the seller's profit. 
 This project is of interest to me because I like the idea of incorporating a countdown simulator.
 It'll challenge me to figure out how to terminate the function after a time interval and start it up again.
+
+#### User Stories:
+
+- As a user, I want to be able to add items into my auctioning list.
+- As a user, I want to be able to remove items from my auctionist list.
+- As a user, I want to be able to view my items on the auctioning list.
+- As a user, I want to be able to set the bidding functionalities for each item.
+- As a user, I want to be able to begin an auction house.
+- As a user, I want to be able to remember who bought a specific item.
+- As a user, I want to be able to see the total profit made in that sitting.
+- As a user, I want to be able to sell off the items at the end of the sitting.
