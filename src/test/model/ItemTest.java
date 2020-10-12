@@ -23,6 +23,7 @@ class ItemTest {
         assertEquals(testItem.getBidIncrement(), 50);
         assertEquals(testItem.getBuyOut(), 400);
         assertEquals(testItem.getCurrentPrice(), 100);
+        assertEquals(testItem.getBidCount(), 0);
     }
 
     @Test

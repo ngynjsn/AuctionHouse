@@ -99,8 +99,9 @@ public class AuctionHouse {
                 currentItem = getFirstItem();
                 System.out.println("First item for sale is: " + currentItem.getName());
                 System.out.println("Initial price is " + currentItem.getInitialPrice() + ". Bidding increments are "
-                        + currentItem.getBidIncrement() + ". Buyout price is " + currentItem.getBuyOut());
-                System.out.println("Would you like to bid for this item?");
+                        + currentItem.getBidIncrement() + ". Buyout price is " + currentItem.getBuyOut()
+                        + ". Current price is " + currentItem.getCurrentPrice());
+                System.out.println("Would you like to bid for this item? If yes, type 'bid'. Else type 'no'");
                 command = input.next();
                 command = command.toLowerCase();
                 processCommandWithItem(command, currentItem);
@@ -111,13 +112,21 @@ public class AuctionHouse {
     // MODIFIES: this, item
     // EFFECTS: process commands that are given by user
     private void processCommandWithItem(String command, Item i) {
-
+        if (command.equals("bid")) {
+            doBidding(i);
+        } else if (command.equals("no")) {
+            finishItem(i);
+        }
     }
 
+    // MODIFIES: TODO
+    private void finishItem(Item i) {
+        //stub
+    }
 
-    // MODIFIES:
-    private void doBidding() {
-
+    // MODIFIES: TODO
+    private void doBidding(Item i) {
+        // stub
     }
 
     // MODIFIES: this
