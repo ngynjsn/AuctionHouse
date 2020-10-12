@@ -11,15 +11,15 @@ public class Item {
     private String buyer;
 
 
-    // EFFECTS: contructs an item with name, initial price, bid increments,
+    // EFFECTS: constructs an item with name, initial price, bid increments,
     //          and a buy out price
-    public Item(String name, double intitialPrice, double bidIncrement,
+    public Item(String name, double initialPrice, double bidIncrement,
                 double buyOut) {
         this.name = name;
-        this.initialPrice = intitialPrice;
+        this.initialPrice = initialPrice;
         this.bidIncrement = bidIncrement;
         this.buyOut = buyOut;
-        this.currentPrice = 0;
+        this.currentPrice = initialPrice;
     }
 
     // getters:
@@ -46,5 +46,9 @@ public class Item {
 
     public String getBuyer() {
         return buyer;
+    }
+
+    public void setBuyer(String n) {
+        buyer = n;
     }
 }

@@ -111,7 +111,7 @@ public class AuctionHouse {
         return false;
     }
 
-    // REQUIRES: auctiongList is non empty
+    // REQUIRES: auctioningList is non empty
     // EFFECTS: returns the first item on auctioningList
     public Item getFirstItem() {
         return auctioningList.get(0);
@@ -126,6 +126,10 @@ public class AuctionHouse {
 
     public String getSeller() {
         return seller;
+    }
+
+    public Item getCurrentItem() {
+        return currentItem;
     }
 
     // setters:
