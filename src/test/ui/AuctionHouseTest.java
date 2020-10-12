@@ -13,12 +13,14 @@ public class AuctionHouseTest {
 
     @BeforeEach
     public void setUp() {
-        AuctionHouse testHouse = new AuctionHouse();
+        AuctionHouse testHouse = new AuctionHouse("Jason");
         testItem = new Item("Guitar", 100, 50, 500);
     }
 
     @Test
     public void testAddItem() {
+        AuctionHouse testHouse = new AuctionHouse("Jason");
+        testItem = new Item("Guitar", 100, 50, 500);
         testHouse.addItem(testItem);
         assertEquals(1, testHouse.viewItems().size());
         testHouse.addItem(testItem);
@@ -27,11 +29,15 @@ public class AuctionHouseTest {
 
     @Test
     public void testRemoveItemNoItems() {
+        AuctionHouse testHouse = new AuctionHouse("Jason");
+        testItem = new Item("Guitar", 100, 50, 500);
         assertFalse(testHouse.removeItem("Jason"));
     }
 
     @Test
     public void testRemoveItemWithItem() {
+        AuctionHouse testHouse = new AuctionHouse("Jason");
+        testItem = new Item("Guitar", 100, 50, 500);
         Item itemTwo = new Item("Doll", 10, 5, 30);
         testHouse.addItem(testItem);
         testHouse.addItem(itemTwo);
@@ -42,22 +48,28 @@ public class AuctionHouseTest {
 
     @Test
     public void testGetFirstItem() {
+        AuctionHouse testHouse = new AuctionHouse("Jason");
+        testItem = new Item("Guitar", 100, 50, 500);
         Item itemTwo = new Item("Doll", 10, 5, 30);
         testHouse.addItem(testItem);
         testHouse.addItem(itemTwo);
 
-        assertEquals("Doll", testHouse.getFirstItem().getName());
+        assertEquals("Guitar", testHouse.getFirstItem().getName());
     }
 
     @Test
     public void testSetSeller() {
-        testHouse.setSeller("Jason");
-        assertEquals(testHouse.getSeller(), "Jason");
+        AuctionHouse testHouse = new AuctionHouse("Jason");
+        testItem = new Item("Guitar", 100, 50, 500);
+        testHouse.setSeller("John");
+        assertEquals(testHouse.getSeller(), "John");
     }
 
     @Test
     public void testSetCurrentItem() {
+        AuctionHouse testHouse = new AuctionHouse("Jason");
+        testItem = new Item("Guitar", 100, 50, 500);
         testHouse.setCurrentItem(testItem);
-        assertEquals("Guitar", testHouse.getCurrentItem());
+        assertEquals("Guitar", testHouse.getCurrentItem().getName());
     }
 }
