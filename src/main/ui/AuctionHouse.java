@@ -25,7 +25,7 @@ public class AuctionHouse {
     // EFFECTS: constructor to help with tests
     //          assigns the seller's name to n and creates an empty auctioning list
     public AuctionHouse(String n) {
-        auctioningList = new ArrayList<Item>();
+        auctioningList = new ArrayList<>();
         seller = n;
     }
 
@@ -33,7 +33,7 @@ public class AuctionHouse {
     // EFFECTS: processes user input
     public void runAuctionHouse() {
         boolean keepGoing = true;
-        String command = null;
+        String command;
 
         init();
 
@@ -63,7 +63,7 @@ public class AuctionHouse {
     // MODIFIES: this
     // EFFECTS: initializes empty list
     private void init() {
-        auctioningList = new ArrayList<Item>();
+        auctioningList = new ArrayList<>();
         input = new Scanner(System.in);
     }
 
@@ -89,7 +89,7 @@ public class AuctionHouse {
         seller = input.next();
         System.out.println("Let's get it started, " + seller + "!");
         boolean keepGoing = true;
-        String command = null;
+        String command;
 
         while (keepGoing) {
             if (auctioningList.isEmpty()) {
@@ -126,12 +126,11 @@ public class AuctionHouse {
     private void finishItem(Item i) {
         if (i.getBidCount() == 0) {
             System.out.println("Item had no bidders");
-            removeItem(i.getName());
         } else {
             currentProfit += i.getCurrentPrice();
             System.out.println("Item sold to " + i.getBuyer() + " for " + i.getCurrentPrice());
-            removeItem(i.getName());
         }
+        removeItem(i.getName());
     }
 
     // MODIFIES: this, i
@@ -194,15 +193,13 @@ public class AuctionHouse {
         System.out.println("What is the name of your item?");
         String name = input.next();
         System.out.println("What would you like to be the initial price?");
-        Double initPrice = input.nextDouble();
+        double initPrice = input.nextDouble();
         System.out.println("What would you like to be the bid increment?");
-        Double bidPrice = input.nextDouble();
+        double bidPrice = input.nextDouble();
         System.out.println("What would you like to be the buyout offer?");
-        Double buyOut = input.nextDouble();
+        double buyOut = input.nextDouble();
 
-        Item item = new Item(name, initPrice, bidPrice, buyOut);
-
-        return item;
+        return new Item(name, initPrice, bidPrice, buyOut);
     }
 
     // MODIFIES: this
