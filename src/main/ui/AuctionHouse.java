@@ -61,14 +61,14 @@ public class AuctionHouse {
     }
 
     // MODIFIES: this
-    // EFFECTS: initializes empty list
+    // EFFECTS: initializes empty list and instantiates scanner
     private void init() {
         auctioningList = new ArrayList<>();
         input = new Scanner(System.in);
     }
 
     // MODIFIES: this
-    // EFFECTS: processes user command
+    // EFFECTS: processes user command depending on keywords
     public void processCommand(String command) {
         if (command.equals("a")) {
             doAddItem();
@@ -111,7 +111,7 @@ public class AuctionHouse {
     }
 
     // MODIFIES: this, item
-    // EFFECTS: process commands that are given by user
+    // EFFECTS: process commands depending on keyword that are given by user
     private void processCommandWithItem(String command, Item i) {
         if (command.equals("bid")) {
             doBidding(i);
@@ -157,8 +157,8 @@ public class AuctionHouse {
     }
 
     // MODIFIES: this
-    // EFFECTS: begins the removal of an item, if found. return true statement
-    //          if item is found, else return false statement
+    // EFFECTS: begins the removal of an item. if found, return true statement and remove item.
+    //          if item is not found, return false statement and do nothing.
     private void doRemoveItem() {
         System.out.println("What is the name of the item you are trying to remove?");
         String name = input.next();

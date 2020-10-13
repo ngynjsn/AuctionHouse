@@ -61,6 +61,8 @@ public class Item {
         return bidCount;
     }
 
+    // setters:
+
     public void setBuyer(String n) {
         buyer = n;
     }
