@@ -33,6 +33,19 @@ class ItemTest {
         assertEquals(testItem.getBuyer(), "John");
     }
 
+    @Test
+    public void testSetCurrentPrice() {
+        Item testItem= new Item("Guitar", 100, 50, 400);
+        testItem.setCurrentPrice(150);
+        assertEquals(testItem.getCurrentPrice(), 150);
+    }
 
+    @Test
+    public void testIncrementBidCount() {
+        Item testItem= new Item("Guitar", 100, 50, 400);
+        assertEquals(0, testItem.getBidCount());
+        testItem.incrementBidCount();
+        assertEquals(1, testItem.getBidCount());
+    }
 
 }

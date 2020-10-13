@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// THE APP TO BEGIN THE AUCTION HOUSE
+// Auction house application that is used to begin adding items into an auction list and can begin the auctioning
+// process.
 
 public class AuctionHouse {
     private List<Item> auctioningList;
@@ -22,7 +23,7 @@ public class AuctionHouse {
     }
 
     // EFFECTS: constructor to help with tests
-    //          assigns the seller's name to n and creates empty auctioning list
+    //          assigns the seller's name to n and creates an empty auctioning list
     public AuctionHouse(String n) {
         auctioningList = new ArrayList<Item>();
         seller = n;
@@ -97,7 +98,7 @@ public class AuctionHouse {
                 keepGoing = false;
             } else {
                 currentItem = getFirstItem();
-                System.out.println("First item for sale is: " + currentItem.getName());
+                System.out.println("Current item for sale is: " + currentItem.getName());
                 System.out.println("Initial price is " + currentItem.getInitialPrice() + ". Bidding increments are "
                         + currentItem.getBidIncrement() + ". Buyout price is " + currentItem.getBuyOut()
                         + ". Current price is " + currentItem.getCurrentPrice());
@@ -119,14 +120,41 @@ public class AuctionHouse {
         }
     }
 
-    // MODIFIES: TODO
+    // MODIFIES: this
+    // EFFECTS: continues the auction house process by removing first item on the list and moving onto the next.
+    //          adds profit from item to currentProfit
     private void finishItem(Item i) {
-        //stub
+        if (i.getBidCount() == 0) {
+            System.out.println("Item had no bidders");
+            removeItem(i.getName());
+        } else {
+            currentProfit += i.getCurrentPrice();
+            System.out.println("Item sold to " + i.getBuyer() + " for " + i.getCurrentPrice());
+            removeItem(i.getName());
+        }
     }
 
-    // MODIFIES: TODO
+    // MODIFIES: this, i
+    // EFFECTS: processes the bidding functions. Begins bid with initial price and remembers bidder. Increments current
+    //          item price by bid amount and remembers bidder. Stops bidding for item once current price exceeds
+    //          buy out price and removes from auctioning list also remembering bidder.
     private void doBidding(Item i) {
-        // stub
+        System.out.println("What is your name?");
+        String buyer = input.next();
+        if (i.getBidCount() == 0) {
+            System.out.println("Bid made by " + buyer + " for " + i.getCurrentPrice());
+            i.incrementBidCount();
+            i.setBuyer(buyer);
+        } else if ((i.getCurrentPrice() + i.getBidIncrement()) >= i.getBuyOut()) {
+            System.out.println("Item sold to " + buyer + " for " + i.getBuyOut());
+            i.setBuyer(buyer);
+            currentProfit += i.getBuyOut();
+            removeItem(i.getName());
+        } else {
+            System.out.println("Bid made by " + buyer + " for " + (i.getCurrentPrice() + i.getBidIncrement()));
+            i.setCurrentPrice(i.getCurrentPrice() + i.getBidIncrement());
+            i.setBuyer(buyer);
+        }
     }
 
     // MODIFIES: this
