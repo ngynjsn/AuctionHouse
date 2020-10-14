@@ -30,7 +30,7 @@ public class AuctionHouse {
 
     // MODIFIES: this
     // EFFECTS: processes user input
-    public void runAuctionHouse() {
+    private void runAuctionHouse() {
         boolean keepGoing = true;
         String command;
 
@@ -51,7 +51,7 @@ public class AuctionHouse {
     }
 
     // EFFECTS: lists the options available to the user
-    public void displayMenu() {
+    private void displayMenu() {
         System.out.println("\nSelect from:");
         System.out.println("\ta -> add item");
         System.out.println("\tr -> remove item");
@@ -68,7 +68,7 @@ public class AuctionHouse {
 
     // MODIFIES: this
     // EFFECTS: processes user command depending on keywords
-    public void processCommand(String command) {
+    private void processCommand(String command) {
         if (command.equals("a")) {
             doAddItem();
         } else if (command.equals("r")) {
