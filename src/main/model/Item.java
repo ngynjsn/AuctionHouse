@@ -14,7 +14,7 @@ public class Item {
 
     // REQUIRES: buyOut price is greater than initialPrice
     // EFFECTS: constructs an item with name, initial price, bid increments,
-    //          , a buy out price. Begins with 0 bid count and current price is initial price
+    //          and a buy out price. Begins with 0 bid count and current price is initial price
     public Item(String name, double initialPrice, double bidIncrement,
                 double buyOut) {
         this.name = name;
@@ -33,43 +33,50 @@ public class Item {
 
     // getters:
 
+    //  EFFECTS: returns name of item
     public String getName() {
         return name;
     }
 
+    // EFFECTS: returns initial price of item
     public double getInitialPrice() {
         return initialPrice;
     }
 
+    // EFFECTS: returns bid increment of item
     public double getBidIncrement() {
         return bidIncrement;
     }
 
+    // EFFECTS; returns buy out price of item
     public double getBuyOut() {
         return buyOut;
     }
 
+    // EFFECTS: returns current price of item
     public double getCurrentPrice() {
         return currentPrice;
     }
 
+    // EFFECTS: returns buyer of this item
     public String getBuyer() {
         return buyer;
     }
 
+    // EFFECTS: returns total bid count of item
     public int getBidCount() {
         return bidCount;
     }
 
     // setters:
 
+    // EFFECTS: sets buyer field to given name, n
     public void setBuyer(String n) {
         buyer = n;
     }
 
+    // EFFECTS: sets current price to given price
     public void setCurrentPrice(double price) {
         currentPrice = price;
     }
-
-
 }

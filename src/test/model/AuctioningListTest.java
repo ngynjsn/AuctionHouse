@@ -4,7 +4,6 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ui.AuctionHouse;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,9 +24,9 @@ public class AuctioningListTest {
         AuctioningList testList = new AuctioningList();
         testItem = new Item("Guitar", 100, 50, 500);
         testList.addItem(testItem);
-        assertEquals(1, testList.viewItems().size());
+        assertEquals(1, testList.getList().size());
         testList.addItem(testItem);
-        assertEquals(2, testList.viewItems().size());
+        assertEquals(2, testList.getList().size());
     }
 
     @Test
@@ -46,7 +45,7 @@ public class AuctioningListTest {
         testList.addItem(itemTwo);
 
         assertTrue(testList.removeItem("Doll"));
-        assertEquals(1, testList.viewItems().size());
+        assertEquals(1, testList.getList().size());
     }
 
     @Test

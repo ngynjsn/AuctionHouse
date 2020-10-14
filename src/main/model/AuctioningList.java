@@ -8,6 +8,7 @@ import java.util.List;
 public class AuctioningList {
     private List<Item> list;
 
+    // EFFECTS: construct an auctioning list which is empty
     public AuctioningList() {
         list = new ArrayList<>();
     }
@@ -18,9 +19,8 @@ public class AuctioningList {
         list.add(i);
     }
 
-    // REQUIRES: item with name, n, needs to be already in the list
     // MODIFIES: this
-    // EFFECTS: removes an item with the given name n
+    // EFFECTS: removes an item with the given name n if found and returns true. Else, return false.
     public boolean removeItem(String n) {
         for (Item next : list) {
             if (next.getName().equals(n)) {
@@ -37,10 +37,10 @@ public class AuctioningList {
         return list.get(0);
     }
 
-
     // getters:
 
-    public List<Item> viewItems() {
+    // EFFECTS: returns list
+    public List<Item> getList() {
         return list;
     }
 
