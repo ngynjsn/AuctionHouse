@@ -27,3 +27,7 @@ It'll challenge me to figure out how to terminate the function after a time inte
 - As a user, I want to be able to begin an auction house.
 - As a user, I want to be able to remember who bought a specific item.
 - As a user, I want to be able to see the total profit made in that sitting.
+- As a user, I want to be able to save my items in the auctioning list in case I don't
+to sell the items yet.
+- As a user, when I start the application, I want to be given the option to load any pre-loaded,
+auctioning list.
