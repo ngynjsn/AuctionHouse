@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AuctioningListTest {
 
-    Item testItem;
-    AuctioningList testList;
+    private Item testItem;
+    private AuctioningList testList;
 
     @BeforeEach
     public void setUp() {
@@ -21,7 +21,6 @@ public class AuctioningListTest {
 
     @Test
     public void testAddItem() {
-        AuctioningList testList = new AuctioningList();
         testItem = new Item("Guitar", 100, 50, 500);
         testList.addItem(testItem);
         assertEquals(1, testList.getList().size());
@@ -31,14 +30,12 @@ public class AuctioningListTest {
 
     @Test
     public void testRemoveItemNoItems() {
-        AuctioningList testList = new AuctioningList();
         testItem = new Item("Guitar", 100, 50, 500);
         assertFalse(testList.removeItem("Jason"));
     }
 
     @Test
     public void testRemoveItemWithItem() {
-        AuctioningList testList = new AuctioningList();
         testItem = new Item("Guitar", 100, 50, 500);
         Item itemTwo = new Item("Doll", 10, 5, 30);
         testList.addItem(testItem);
@@ -50,7 +47,6 @@ public class AuctioningListTest {
 
     @Test
     public void testGetFirstItem() {
-        AuctioningList testList = new AuctioningList();
         testItem = new Item("Guitar", 100, 50, 500);
         Item itemTwo = new Item("Doll", 10, 5, 30);
         testList.addItem(testItem);

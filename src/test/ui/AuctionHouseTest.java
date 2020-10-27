@@ -17,22 +17,13 @@ public class AuctionHouseTest {
 
     @BeforeEach
     public void setUp() {
-        AuctionHouse testHouse = new AuctionHouse("Jason");
+        testHouse = new AuctionHouse("Jason");
         testList = new AuctioningList();
         testItem = new Item("Guitar", 100, 50, 500);
     }
 
     @Test
-    public void testSetSeller() {
-        AuctionHouse testHouse = new AuctionHouse("Jason");
-        testItem = new Item("Guitar", 100, 50, 500);
-        testHouse.setSeller("John");
-        assertEquals(testHouse.getSeller(), "John");
-    }
-
-    @Test
     public void testSetCurrentItem() {
-        AuctionHouse testHouse = new AuctionHouse("Jason");
         testItem = new Item("Guitar", 100, 50, 500);
         testHouse.setCurrentItem(testItem);
         assertEquals("Guitar", testHouse.getCurrentItem().getName());

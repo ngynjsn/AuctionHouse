@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class AuctionHouse {
     private AuctioningList auctioningList;
-    private String seller;
     private Item currentItem;
     private double currentProfit = 0;
     private Scanner input;
@@ -22,10 +21,9 @@ public class AuctionHouse {
     }
 
     // EFFECTS: constructor to help with tests
-    //          assigns the seller's name to n and creates an empty auctioning list
+    //          creates an empty auctioning list
     public AuctionHouse(String n) {
         auctioningList = new AuctioningList();
-        seller = n;
     }
 
     // MODIFIES: this
@@ -62,8 +60,13 @@ public class AuctionHouse {
     // MODIFIES: this
     // EFFECTS: initializes empty list and instantiates scanner
     private void init() {
+        String name;
         auctioningList = new AuctioningList();
         input = new Scanner(System.in);
+        System.out.println("Please type in your name");
+        name = input.next();
+        auctioningList.setName(name);
+        System.out.println("Thank you!");
     }
 
     // MODIFIES: this
@@ -128,11 +131,9 @@ public class AuctionHouse {
 
     // REQUIRES: auctioning list is non-empty
     // MODIFIES: this
-    // EFFECTS: prompts for the sellers name and then begins the auction house
+    // EFFECTS: begins the auction house
     private void doAuctionHouse() {
-        System.out.println("What is your name?");
-        seller = input.next();
-        System.out.println("Let's get it started, " + seller + "!");
+        System.out.println("Let's get it started, " + auctioningList.getName() + "!");
         boolean keepGoing = true;
         String command;
 
@@ -203,22 +204,12 @@ public class AuctionHouse {
 
     // getters:
 
-    // EFFECTS: returns auction items seller
-    public String getSeller() {
-        return seller;
-    }
-
     // EFFECTS: returns current item auction house is holding
     public Item getCurrentItem() {
         return currentItem;
     }
 
     // setters:
-
-    // EFFECTS: sets seller to string given, n.
-    public void setSeller(String n) {
-        seller = n;
-    }
 
     // EFFECTS: sets current item to item given, i.
     public void setCurrentItem(Item i) {

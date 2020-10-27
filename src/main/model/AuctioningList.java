@@ -2,10 +2,15 @@ package model;
 
 // Represents the auctioning list that is used in the AuctionHouse.
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuctioningList {
+public class AuctioningList implements Writable {
+    private String name;
     private List<Item> list;
 
     // EFFECTS: construct an auctioning list which is empty
@@ -37,6 +42,13 @@ public class AuctioningList {
         return list.get(0);
     }
 
+    // setters:
+
+    // EFFECTS: sets the name of the person selling these items
+    public void setName(String name) {
+        this.name = name;
+    }
+
     // getters:
 
     // EFFECTS: returns list
@@ -44,4 +56,25 @@ public class AuctioningList {
         return list;
     }
 
+    // EFFECTS: returns name
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("items", itemsToJson());
+        return json;
+    }
+
+    private JSONArray itemsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Item i : list) {
+            jsonArray.put(i.toJson());
+        }
+
+        return jsonArray;
+    }
 }

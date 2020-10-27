@@ -3,7 +3,10 @@ package model;
 // Represents an item that can be used in an auction house. It has a name, initial price, bid increments, bid count,
 // buy out price, current price, and the name of the buyer of the item
 
-public class Item {
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Item implements Writable {
     private String name;
     private double initialPrice;
     private double bidIncrement;
@@ -78,5 +81,15 @@ public class Item {
     // EFFECTS: sets current price to given price
     public void setCurrentPrice(double price) {
         currentPrice = price;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("initial price", initialPrice);
+        json.put("bid increment", bidIncrement);
+        json.put("buy out", buyOut);
+        return json;
     }
 }
