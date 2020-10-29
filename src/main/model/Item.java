@@ -86,10 +86,10 @@ public class Item implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("name", name);
-        json.put("initial price", initialPrice);
-        json.put("bid increment", bidIncrement);
-        json.put("buy out", buyOut);
+        json.put("item name", name);
+        json.put("initial price", initialPrice + "");
+        json.put("bid increment", bidIncrement + "");
+        json.put("buy out", buyOut + "");
         return json;
     }
 }

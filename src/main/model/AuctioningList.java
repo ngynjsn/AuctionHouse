@@ -13,8 +13,10 @@ public class AuctioningList implements Writable {
     private String name;
     private List<Item> list;
 
-    // EFFECTS: construct an auctioning list which is empty
-    public AuctioningList() {
+    // EFFECTS: construct an auctioning list which is empty and a name designated to the person selling
+    //          these items
+    public AuctioningList(String name) {
+        this.name = name;
         list = new ArrayList<>();
     }
 
@@ -64,6 +66,7 @@ public class AuctioningList implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
+        json.put("name", name);
         json.put("items", itemsToJson());
         return json;
     }

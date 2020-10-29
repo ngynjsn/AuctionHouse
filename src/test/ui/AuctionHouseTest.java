@@ -18,7 +18,7 @@ public class AuctionHouseTest {
     @BeforeEach
     public void setUp() {
         testHouse = new AuctionHouse("Jason");
-        testList = new AuctioningList();
+        testList = new AuctioningList("Jason's List");
         testItem = new Item("Guitar", 100, 50, 500);
     }
 

@@ -27,7 +27,7 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representatioon of auctioning list to file
+    // EFFECTS: writes JSON representation of auctioning list to file
     public void write(AuctioningList al) {
         JSONObject json = al.toJson();
         saveToFile(json.toString(TAB));

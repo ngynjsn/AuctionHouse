@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "item name": "Guitar",
+      "initial price": "100",
+      "bid increment": "30",
+      "buy out": "250"
+    },
+    {
+      "item name": "Doll",
+      "initial price": "20",
+      "bid increment": "5",
+      "buy out": "50"
+    }
+  ],
+  "name": "Jason"
+}

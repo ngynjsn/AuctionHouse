@@ -23,7 +23,7 @@ public class AuctionHouse {
     // EFFECTS: constructor to help with tests
     //          creates an empty auctioning list
     public AuctionHouse(String n) {
-        auctioningList = new AuctioningList();
+        auctioningList = new AuctioningList(n);
     }
 
     // MODIFIES: this
@@ -61,12 +61,11 @@ public class AuctionHouse {
     // EFFECTS: initializes empty list and instantiates scanner
     private void init() {
         String name;
-        auctioningList = new AuctioningList();
         input = new Scanner(System.in);
-        System.out.println("Please type in your name");
+        System.out.println("Please type in your name:");
         name = input.next();
-        auctioningList.setName(name);
         System.out.println("Thank you!");
+        auctioningList = new AuctioningList(name);
     }
 
     // MODIFIES: this
