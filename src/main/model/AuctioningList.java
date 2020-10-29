@@ -44,13 +44,6 @@ public class AuctioningList implements Writable {
         return list.get(0);
     }
 
-    // setters:
-
-    // EFFECTS: sets the name of the person selling these items
-    public void setName(String name) {
-        this.name = name;
-    }
-
     // getters:
 
     // EFFECTS: returns list
