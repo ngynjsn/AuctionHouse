@@ -3,20 +3,29 @@ package ui;
 
 import model.AuctioningList;
 import model.Item;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // Auction house application that is used to begin adding items into an auction list, removing items, viewing items,
 // and can begin the auctioning process.
 
 public class AuctionHouse {
+    private static final String JSON_STORE = "./data/auctioninglist.json";
     private AuctioningList auctioningList;
     private Item currentItem;
     private double currentProfit = 0;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: constructor to run the auction house
     public AuctionHouse() {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runAuctionHouse();
     }
 
@@ -55,6 +64,8 @@ public class AuctionHouse {
         System.out.println("\tr -> remove item");
         System.out.println("\tv -> view items");
         System.out.println("\tb -> begin auction house");
+        System.out.println("\ts -> save your list to file");
+        System.out.println("\tl -> load list from file");
     }
 
     // MODIFIES: this
@@ -79,6 +90,33 @@ public class AuctionHouse {
             doViewList();
         } else if (command.equals("b")) {
             doAuctionHouse();
+        } else if (command.equals("s")) {
+            saveList();
+        } else if (command.equals("l")) {
+            loadList();
+        }
+    }
+
+    // EFFECTS: saves the list to file
+    private void saveList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(auctioningList);
+            jsonWriter.close();
+            System.out.println("Successfully saved list to: " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads list from file
+    private void loadList() {
+        try {
+            auctioningList = jsonReader.read();
+            System.out.println("Loaded list from: " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read file from: " + JSON_STORE);
         }
     }
 
