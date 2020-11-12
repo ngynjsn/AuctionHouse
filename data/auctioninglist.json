@@ -1,9 +1,9 @@
 {
     "name": "Jason",
     "items": [{
-        "bid increment": "20.0",
-        "buy out": "70.0",
-        "initial price": "30.0",
-        "item name": "Mouse"
+        "bid increment": "50.0",
+        "buy out": "300.0",
+        "initial price": "100.0",
+        "item name": "Guitar"
     }]
 }
