@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AuctionHouseGUI extends JFrame implements ActionListener {
@@ -35,6 +36,7 @@ public class AuctionHouseGUI extends JFrame implements ActionListener {
 
     public AuctionHouseGUI() {
         super("Auction House");
+        auctioningList = new AuctioningList("Jason");
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,8 +45,10 @@ public class AuctionHouseGUI extends JFrame implements ActionListener {
         initPanels();
         storePanels();
 
+        setLocationRelativeTo(null);
         add(mainPanel);
         pack();
+        setResizable(false);
         setVisible(true);
         initJson();
     }
@@ -134,7 +138,7 @@ public class AuctionHouseGUI extends JFrame implements ActionListener {
     }
 
     private void addItem() {
-        System.out.println("hi");
+        new AddFrame(auctioningList);
     }
 
     private void removeItem() {
