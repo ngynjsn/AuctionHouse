@@ -37,6 +37,7 @@ public class JsonReader {
         return al;
     }
 
+    // EFFECTS: adds items into file in form of JSON
     private void addItems(AuctioningList al, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("items");
         for (Object json : jsonArray) {
@@ -45,6 +46,7 @@ public class JsonReader {
         }
     }
 
+    // EFFECTS: adds item into list in form of JSON
     private void addItem(AuctioningList al, JSONObject jsonObject) {
         String name = jsonObject.getString("item name");
         double initPrice = Double.parseDouble(jsonObject.getString("initial price"));

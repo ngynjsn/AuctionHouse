@@ -16,9 +16,9 @@ import java.util.Scanner;
 public class AuctionHouseGUI extends JFrame implements ActionListener {
     private static final String JSON_STORE = "./data/auctioninglist.json";
     private AuctioningList auctioningList;
-    private Item currentItem;
-    private double currentProfit = 0;
-    private Scanner input;
+//    private Item currentItem;
+//    private double currentProfit = 0;
+//    private Scanner input;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
     private JPanel mainPanel;
@@ -153,7 +153,12 @@ public class AuctionHouseGUI extends JFrame implements ActionListener {
     }
 
     private void runHouse() {
-        System.out.println("b");
+        if (auctioningList.getList().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No items are in the list",
+                    "Message", JOptionPane.INFORMATION_MESSAGE, error);
+        } else {
+            new AuctionHouseFrame(auctioningList);
+        }
     }
 
     private void loadItems() {

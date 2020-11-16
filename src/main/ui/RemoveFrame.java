@@ -15,6 +15,7 @@ public class RemoveFrame extends JFrame implements ActionListener {
     private TextField tfItemName;
     private JButton removeItem;
     private AuctioningList list;
+    private ImageIcon error = new ImageIcon("./data/error.png");
 
     public RemoveFrame(AuctioningList list) {
         setLayout(new FlowLayout());
@@ -45,7 +46,8 @@ public class RemoveFrame extends JFrame implements ActionListener {
                 clip.open(audioInputStream);
                 clip.start();
             } catch (UnsupportedAudioFileException | IOException | LineUnavailableException exception) {
-                exception.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Audio failed to load",
+                        "Message", JOptionPane.INFORMATION_MESSAGE, error);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Item was not found");

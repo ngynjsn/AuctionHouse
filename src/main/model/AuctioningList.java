@@ -56,6 +56,7 @@ public class AuctioningList implements Writable {
         return name;
     }
 
+    // EFFECTS: stores items into JSON form
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -64,6 +65,7 @@ public class AuctioningList implements Writable {
         return json;
     }
 
+    // EFFECTS: converts items from auctioning list into JSON form (array)
     private JSONArray itemsToJson() {
         JSONArray jsonArray = new JSONArray();
 

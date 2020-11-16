@@ -22,6 +22,7 @@ public class AddFrame extends JFrame implements ActionListener {
     private TextField tfBuyOut;
     private JButton addItem;
     private AuctioningList list;
+    private ImageIcon error = new ImageIcon("./data/error.png");
 
     public AddFrame(AuctioningList list) {
         this.list = list;
@@ -82,7 +83,8 @@ public class AddFrame extends JFrame implements ActionListener {
             clip.open(audioInputStream);
             clip.start();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException exception) {
-            exception.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Audio failed to load",
+                    "Message", JOptionPane.INFORMATION_MESSAGE, error);
         }
         setVisible(false);
     }

@@ -83,6 +83,7 @@ public class Item implements Writable {
         currentPrice = price;
     }
 
+    // EFFECTS: converts item into JSON format
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
