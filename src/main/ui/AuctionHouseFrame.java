@@ -34,6 +34,8 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
         noButton = new JButton("No");
         bidButton.setActionCommand("bid");
         noButton.setActionCommand("no");
+        bidButton.addActionListener(this);
+        noButton.addActionListener(this);
         buttonsPanel.add(bidButton);
         buttonsPanel.add(noButton);
     }
