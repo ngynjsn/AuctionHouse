@@ -9,7 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class AuctionHouseGUI extends JFrame implements ActionListener {
@@ -33,6 +34,8 @@ public class AuctionHouseGUI extends JFrame implements ActionListener {
     private JButton saveButton;
     private JButton loadButton;
     private JButton runButton;
+    private ImageIcon checkMark = new ImageIcon("./data/checkmark.png");
+    private ImageIcon error = new ImageIcon("./data/error.png");
 
     public AuctionHouseGUI() {
         super("Auction House");
@@ -77,7 +80,7 @@ public class AuctionHouseGUI extends JFrame implements ActionListener {
         saveButton = new JButton("Save your items");
         saveButton.setActionCommand("save");
         saveButton.addActionListener(this);
-        loadButton = new JButton("Load previously saved items");
+        loadButton = new JButton("Load saved items");
         loadButton.setActionCommand("load");
         loadButton.addActionListener(this);
     }
@@ -106,7 +109,7 @@ public class AuctionHouseGUI extends JFrame implements ActionListener {
         savePanel.add(new JLabel("Save your items:"));
         savePanel.add(saveButton);
         mainPanel.add(savePanel);
-        loadPanel.add(new JLabel("Load previously saved items:"));
+        loadPanel.add(new JLabel("Load saved items:"));
         loadPanel.add(loadButton);
         mainPanel.add(loadPanel);
         runPanel.add(new JLabel("Run auction house:"));
@@ -146,7 +149,7 @@ public class AuctionHouseGUI extends JFrame implements ActionListener {
     }
 
     private void viewItems() {
-        System.out.println("a");
+        new ViewFrame(auctioningList);
     }
 
     private void runHouse() {
@@ -154,11 +157,27 @@ public class AuctionHouseGUI extends JFrame implements ActionListener {
     }
 
     private void loadItems() {
-        System.out.println("c");
+        try {
+            auctioningList = jsonReader.read();
+            JOptionPane.showMessageDialog(this, "Items successfully loaded",
+                    "Message", JOptionPane.INFORMATION_MESSAGE, checkMark);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Items failed to load",
+                    "Message", JOptionPane.INFORMATION_MESSAGE, error);
+        }
     }
 
     private void saveItems() {
-        System.out.println("d");
+        try {
+            jsonWriter.open();
+            jsonWriter.write(auctioningList);
+            jsonWriter.close();
+            JOptionPane.showMessageDialog(this, "Items successfully saved",
+                    "Message", JOptionPane.INFORMATION_MESSAGE, checkMark);
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Items failed to save",
+                    "Message", JOptionPane.INFORMATION_MESSAGE, error);
+        }
     }
 
 }

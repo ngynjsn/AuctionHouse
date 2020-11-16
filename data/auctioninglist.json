@@ -1,9 +1,23 @@
 {
     "name": "Jason",
-    "items": [{
-        "bid increment": "50.0",
-        "buy out": "300.0",
-        "initial price": "100.0",
-        "item name": "Guitar"
-    }]
+    "items": [
+        {
+            "bid increment": "30.0",
+            "buy out": "50.0",
+            "initial price": "20.0",
+            "item name": "Guitar"
+        },
+        {
+            "bid increment": "30.0",
+            "buy out": "50.0",
+            "initial price": "20.0",
+            "item name": "Doll"
+        },
+        {
+            "bid increment": "30.0",
+            "buy out": "50.0",
+            "initial price": "20.0",
+            "item name": "Has"
+        }
+    ]
 }
