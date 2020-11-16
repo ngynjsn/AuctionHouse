@@ -142,7 +142,7 @@ public class AuctionHouseGUI extends JFrame implements ActionListener {
     }
 
     private void removeItem() {
-        System.out.println("bye");
+        new RemoveFrame(auctioningList);
     }
 
     private void viewItems() {

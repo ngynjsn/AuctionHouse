@@ -50,10 +50,10 @@ public class AddFrame extends JFrame implements ActionListener {
     }
 
     private void initializeTextFields() {
-        tfItemName = new TextField(3);
-        tfInitialPrice = new TextField(3);
-        tfBidIncrement = new TextField(3);
-        tfBuyOut = new TextField(3);
+        tfItemName = new TextField(4);
+        tfInitialPrice = new TextField(4);
+        tfBidIncrement = new TextField(4);
+        tfBuyOut = new TextField(4);
     }
 
     private void addLabelsAndTextFields() {
