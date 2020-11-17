@@ -1,7 +1,6 @@
 package ui;
 
 import model.AuctioningList;
-import model.Item;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -11,14 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class AuctionHouseGUI extends JFrame implements ActionListener {
     private static final String JSON_STORE = "./data/auctioninglist.json";
     private AuctioningList auctioningList;
-//    private Item currentItem;
-//    private double currentProfit = 0;
-//    private Scanner input;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
     private JPanel mainPanel;
@@ -46,7 +41,7 @@ public class AuctionHouseGUI extends JFrame implements ActionListener {
         initButtons();
         initJsonButtons();
         initPanels();
-        storePanels();
+        storePanelsAndButtons();
 
         setLocationRelativeTo(null);
         add(mainPanel);
@@ -95,7 +90,7 @@ public class AuctionHouseGUI extends JFrame implements ActionListener {
         runPanel = new JPanel();
     }
 
-    private void storePanels() {
+    private void storePanelsAndButtons() {
         mainPanel.setLayout(new GridLayout(6, 1));
         addPanel.add(new JLabel("Add an item:"));
         addPanel.add(addButton);

@@ -3,35 +3,52 @@ package ui;
 import model.AuctioningList;
 import model.Item;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class AuctionHouseFrame extends JFrame implements ActionListener {
     private AuctioningList list;
     private Item currentItem;
     private double currentProfit;
-    private JPanel mainPanel;
     private JPanel itemPanel;
     private JPanel buttonsPanel;
-    private JButton bidButton;
-    private JButton noButton;
+    private JLabel currentPriceLabel;
+    private JLabel nameLabel;
+    private JLabel bidIncrementLabel;
+    private JLabel buyOutLabel;
     private ImageIcon checkmark = new ImageIcon("./data/checkmark.png");
+    private ImageIcon error = new ImageIcon("./data/error.png");
+    private ImageIcon dog = new ImageIcon("./data/tobs.jpg");
 
     public AuctionHouseFrame(AuctioningList list) {
         setLayout(new FlowLayout());
         this.list = list;
         setVisible(true);
         setLocationRelativeTo(null);
-        setSize(400, 200);
+        setSize(400, 125);
         setTitle("Auction House");
-        runAuctionHouse();
+        initPanels();
+        initButtons();
+
+        currentItem = list.getFirstItem();
+        nameLabel = new JLabel("Name: " + currentItem.getName());
+        currentPriceLabel = new JLabel("Current Price: " + currentItem.getInitialPrice());
+        bidIncrementLabel = new JLabel("Bid Increment: " + currentItem.getBidIncrement());
+        buyOutLabel = new JLabel("Buy Out: " + currentItem.getBuyOut());
+        itemPanel.add(nameLabel);
+        itemPanel.add(currentPriceLabel);
+        itemPanel.add(bidIncrementLabel);
+        itemPanel.add(buyOutLabel);
     }
 
     private void initButtons() {
-        bidButton = new JButton("Bid");
-        noButton = new JButton("No");
+        JButton bidButton = new JButton("Bid");
+        JButton noButton = new JButton("No");
         bidButton.setActionCommand("bid");
         noButton.setActionCommand("no");
         bidButton.addActionListener(this);
@@ -41,7 +58,7 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
     }
 
     private void initPanels() {
-        mainPanel = new JPanel(new GridLayout(2, 1));
+        JPanel mainPanel = new JPanel(new GridLayout(2, 1));
         itemPanel = new JPanel();
         buttonsPanel = new JPanel();
         mainPanel.add(itemPanel);
@@ -49,26 +66,29 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
         this.add(mainPanel);
     }
 
-    private void runAuctionHouse() {
-        initPanels();
-        initButtons();
-
-//        while (keepGoing) {
-//            if (list.getList().isEmpty()) {
-//                JOptionPane.showMessageDialog(this, "Total profit is: " + currentProfit);
-//                keepGoing = false;
-//            } else {
-//                currentItem = list.getFirstItem();
-//                JLabel nameLabel = new JLabel("Name: " + currentItem.getName());
-//                JLabel initialPriceLabel = new JLabel("Initial Price: " + currentItem.getInitialPrice());
-//                JLabel bidIncrementLabel = new JLabel("Bid Increment: " + currentItem.getBidIncrement());
-//                JLabel buyOutLabel = new JLabel("Buy Out: " + currentItem.getBuyOut());
-//                itemPanel.add(nameLabel);
-//                itemPanel.add(initialPriceLabel);
-//                itemPanel.add(bidIncrementLabel);
-//                itemPanel.add(buyOutLabel);
-//            }
-//        }
+    private void updateAuctionHouse() {
+        if (list.getList().isEmpty()) {
+            String soundName = "./data/Yay.wav";
+            try {
+                AudioInputStream audioInputStream
+                        = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException exception) {
+                JOptionPane.showMessageDialog(this, "Audio failed to load",
+                        "Message", JOptionPane.INFORMATION_MESSAGE, error);
+            }
+            JOptionPane.showMessageDialog(this, "Total profit is: "
+                            + currentProfit,"Results", JOptionPane.INFORMATION_MESSAGE, dog);
+            setVisible(false);
+        } else {
+            currentItem = list.getFirstItem();
+            nameLabel.setText("Name: " + currentItem.getName());
+            currentPriceLabel.setText("Current Price: " + currentItem.getInitialPrice());
+            bidIncrementLabel.setText("Bid Increment: " + currentItem.getBidIncrement());
+            buyOutLabel.setText("Buy Out: " + currentItem.getBuyOut());
+        }
     }
 
     @Override
@@ -81,9 +101,25 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
     }
 
     public void doBidding() {
-        System.out.println("hi");
         String name = JOptionPane.showInputDialog(this, "Enter your name: ",
                 "Bidder Info", JOptionPane.PLAIN_MESSAGE);
+        if (name != null) {
+            if (currentItem.getBidCount() == 0) {
+                currentItem.incrementBidCount();
+                currentItem.setBuyer(name);
+            } else if (currentItem.getCurrentPrice() + currentItem.getBidIncrement() >= currentItem.getBuyOut()) {
+                currentItem.setBuyer(name);
+                currentProfit += currentItem.getBuyOut();
+                list.removeItem(currentItem.getName());
+                JOptionPane.showMessageDialog(this, currentItem.getName() + " has been sold to: "
+                        + name + " for " + currentItem.getBuyOut());
+                updateAuctionHouse();
+            } else {
+                currentItem.setCurrentPrice(currentItem.getCurrentPrice() + currentItem.getBidIncrement());
+                currentItem.setBuyer(name);
+                currentPriceLabel.setText("Current Price: " + currentItem.getCurrentPrice());
+            }
+        }
     }
 
     public void finishItem() {
@@ -95,5 +131,6 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
                     + currentItem.getCurrentPrice());
         }
         list.removeItem(currentItem.getName());
+        updateAuctionHouse();
     }
 }
