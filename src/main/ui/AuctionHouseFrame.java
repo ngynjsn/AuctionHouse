@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+// JFrame that pops up when the user wants to run the auction house. User sees the item for sale
+// and has options to bid or not
 public class AuctionHouseFrame extends JFrame implements ActionListener {
     private AuctioningList list;
     private Item currentItem;
@@ -25,6 +27,8 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
     private ImageIcon error = new ImageIcon("./data/error.png");
     private ImageIcon dog = new ImageIcon("./data/tobs.jpg");
 
+    // MODIFIES: this
+    // EFFECTS: creates the AuctionHouseFrame and assigns this.list to list
     public AuctionHouseFrame(AuctioningList list) {
         setLayout(new FlowLayout());
         this.list = list;
@@ -46,6 +50,8 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
         itemPanel.add(buyOutLabel);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the buttons: bid and no, that could be pressed by the user.
     private void initButtons() {
         JButton bidButton = new JButton("Bid");
         JButton noButton = new JButton("No");
@@ -57,6 +63,9 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
         buttonsPanel.add(noButton);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the panels that are visible to the user. Main panel is separated into the items panel,
+    // which displays item info, and the buttons panel which holds the bid and no buttons
     private void initPanels() {
         JPanel mainPanel = new JPanel(new GridLayout(2, 1));
         itemPanel = new JPanel();
@@ -66,6 +75,10 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
         this.add(mainPanel);
     }
 
+    // MODIFIES: this
+    // EFFECTS: updates the current item's information to accurately represent the item's new current price.
+    // If item has already been purchased, this instead updates the items panel to showcase next item.
+    // If there are no more items to be auctioned, returns the total profit that the user has made along with sound.
     private void updateAuctionHouse() {
         if (list.getList().isEmpty()) {
             String soundName = "./data/Yay.wav";
@@ -91,6 +104,9 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes commands based on the button pressed. Pressing 'bid' will continue with the doBidding() method
+    // where as pressing 'no' will continue with the finishItem() method
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("bid")) {
@@ -100,6 +116,12 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes the bidding functions. Begins bid with initial price and prompts bidder's name.
+    //          Subsequent bids increments current item price by bid amount and remembers bidder's name.
+    //          Once the current price of an item exceeds buy out price, current profit is incremented by
+    //          item's current price, the item is removed from the auctioning list, a message is presented
+    //          to display how much the item is sold for and who bought it, and auction house is updated for next item.
     public void doBidding() {
         String name = JOptionPane.showInputDialog(this, "Enter your name: ",
                 "Bidder Info", JOptionPane.PLAIN_MESSAGE);
@@ -122,13 +144,18 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: continues the auction house process
+    //          If item had no bidders, show message that the item has not been sold.
+    //          Else adds currentItem's price to currentProfit and shows how much it has been sold for and to who.
+    //          Updates auction house to move on to the next item.
     public void finishItem() {
         if (currentItem.getBidCount() == 0) {
             JOptionPane.showMessageDialog(this, "Item had no bidders");
         } else {
             currentProfit += currentItem.getCurrentPrice();
-            JOptionPane.showMessageDialog(this, "Item has been sold for: "
-                    + currentItem.getCurrentPrice());
+            JOptionPane.showMessageDialog(this, "Item has been sold to: " + currentItem.getBuyer()
+                    + " for: " + currentItem.getCurrentPrice());
         }
         list.removeItem(currentItem.getName());
         updateAuctionHouse();

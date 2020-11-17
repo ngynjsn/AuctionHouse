@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+// JFrame that pops up when user is trying to add an item into the auctioning list. Prompts for item name,
+// initial price, bid increments, and buy out price.
 public class AddFrame extends JFrame implements ActionListener {
     private JLabel itemName;
     private JLabel initialPrice;
@@ -24,6 +26,8 @@ public class AddFrame extends JFrame implements ActionListener {
     private AuctioningList list;
     private ImageIcon error = new ImageIcon("./data/error.png");
 
+    // MODIFIES: this
+    // EFFECTS: constructs the AddFrame and assigns this.list to list.
     public AddFrame(AuctioningList list) {
         this.list = list;
 
@@ -43,6 +47,8 @@ public class AddFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the labels that are accompanied with a text field
     private void initializeLabels() {
         itemName = new JLabel("Enter the name of your item: ");
         initialPrice = new JLabel("Enter your initial price: ");
@@ -50,6 +56,8 @@ public class AddFrame extends JFrame implements ActionListener {
         buyOut = new JLabel("Enter the item's buyout offer: ");
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the text fields for user to input information about the item
     private void initializeTextFields() {
         tfItemName = new TextField(4);
         tfInitialPrice = new TextField(4);
@@ -57,6 +65,8 @@ public class AddFrame extends JFrame implements ActionListener {
         tfBuyOut = new TextField(4);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds labels and text fields onto frame
     private void addLabelsAndTextFields() {
         add(itemName);
         add(tfItemName);
@@ -68,6 +78,9 @@ public class AddFrame extends JFrame implements ActionListener {
         add(tfBuyOut);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates item based on information provided in text field then adds the item into the auctioning list.
+    // also plays a ding sound on completion.
     @Override
     public void actionPerformed(ActionEvent e) {
         String name = tfItemName.getText();

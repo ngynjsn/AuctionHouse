@@ -6,10 +6,13 @@ import model.Item;
 import javax.swing.*;
 import java.awt.*;
 
+// JFrame that pops up to show the items in the auctioning list
 public class ViewFrame extends JFrame {
     private AuctioningList list;
     private JPanel mainPanel;
 
+    // MODIFIES: this
+    // EFFECTS: Constructs the ViewFrame and assigns this.list to list
     public ViewFrame(AuctioningList list) {
         setSize(new Dimension(150, 50 + list.getList().size() * 100));
         this.list = list;
@@ -22,6 +25,8 @@ public class ViewFrame extends JFrame {
         setVisible(true);
     }
 
+    // EFFECTS: if the auctioning list is currently empty, show message that the list has no items in it
+    //          else show each item's name, initial price, bid increment, and buyout price on the frame.
     private void produceItems() {
         if (list.getList().size() == 0) {
             setSize(200, 50);
