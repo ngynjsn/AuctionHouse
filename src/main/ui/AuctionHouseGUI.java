@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.EmptyListException;
 import model.AuctioningList;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -179,11 +180,11 @@ public class AuctionHouseGUI extends JFrame implements ActionListener {
     // EFFECTS: showcases error if button is pressed when no items have been placed into the auctioning list.
     //          if list is not empty, creates a new frame which begins the auction house.
     private void runHouse() {
-        if (auctioningList.getList().isEmpty()) {
+        try {
+            new AuctionHouseFrame(auctioningList);
+        } catch (EmptyListException e) {
             JOptionPane.showMessageDialog(this, "No items are in the list",
                     "Message", JOptionPane.INFORMATION_MESSAGE, error);
-        } else {
-            new AuctionHouseFrame(auctioningList);
         }
     }
 

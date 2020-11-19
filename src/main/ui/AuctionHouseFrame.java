@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.EmptyListException;
 import model.AuctioningList;
 import model.Item;
 
@@ -29,7 +30,9 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
 
     // MODIFIES: this
     // EFFECTS: creates the AuctionHouseFrame and assigns this.list to list
-    public AuctionHouseFrame(AuctioningList list) {
+    public AuctionHouseFrame(AuctioningList list) throws EmptyListException {
+        currentItem = list.getFirstItem();
+
         setLayout(new FlowLayout());
         this.list = list;
         setVisible(true);
@@ -39,7 +42,6 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
         initPanels();
         initButtons();
 
-        currentItem = list.getFirstItem();
         nameLabel = new JLabel("Name: " + currentItem.getName());
         currentPriceLabel = new JLabel("Current Price: " + currentItem.getInitialPrice());
         bidIncrementLabel = new JLabel("Bid Increment: " + currentItem.getBidIncrement());
@@ -80,7 +82,9 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
     // If item has already been purchased, this instead updates the items panel to showcase next item.
     // If there are no more items to be auctioned, returns the total profit that the user has made along with sound.
     private void updateAuctionHouse() {
-        if (list.getList().isEmpty()) {
+        try {
+            currentItem = list.getFirstItem();
+        } catch (EmptyListException e) {
             String soundName = "./data/Yay.wav";
             try {
                 AudioInputStream audioInputStream
@@ -93,16 +97,16 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
                         "Message", JOptionPane.INFORMATION_MESSAGE, error);
             }
             JOptionPane.showMessageDialog(this, "Total profit is: "
-                            + currentProfit,"Results", JOptionPane.INFORMATION_MESSAGE, dog);
+                    + currentProfit, "Results", JOptionPane.INFORMATION_MESSAGE, dog);
             setVisible(false);
-        } else {
-            currentItem = list.getFirstItem();
-            nameLabel.setText("Name: " + currentItem.getName());
-            currentPriceLabel.setText("Current Price: " + currentItem.getInitialPrice());
-            bidIncrementLabel.setText("Bid Increment: " + currentItem.getBidIncrement());
-            buyOutLabel.setText("Buy Out: " + currentItem.getBuyOut());
         }
+        nameLabel.setText("Name: " + currentItem.getName());
+        currentPriceLabel.setText("Current Price: " + currentItem.getInitialPrice());
+        bidIncrementLabel.setText("Bid Increment: " + currentItem.getBidIncrement());
+        buyOutLabel.setText("Buy Out: " + currentItem.getBuyOut());
     }
+
+
 
     // MODIFIES: this
     // EFFECTS: processes commands based on the button pressed. Pressing 'bid' will continue with the doBidding() method
@@ -154,7 +158,7 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, "Item had no bidders");
         } else {
             currentProfit += currentItem.getCurrentPrice();
-            JOptionPane.showMessageDialog(this, "Item has been sold to: " + currentItem.getBuyer()
+            JOptionPane.showMessageDialog(this, "Item has been sold to " + currentItem.getBuyer()
                     + " for: " + currentItem.getCurrentPrice());
         }
         list.removeItem(currentItem.getName());

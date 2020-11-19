@@ -2,6 +2,7 @@ package model;
 
 // Test for AuctioningList
 
+import exceptions.EmptyListException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,37 +22,55 @@ public class AuctioningListTest {
 
     @Test
     public void testAddItem() {
-        testItem = new Item("Guitar", 100, 50, 500);
         testList.addItem(testItem);
         assertEquals(1, testList.getList().size());
-        testList.addItem(testItem);
+        Item testItem2 = new Item("Doll", 30, 50, 100);
+        testList.addItem(testItem2);
         assertEquals(2, testList.getList().size());
+        assertEquals(testList.getList().get(0), testItem);
+        assertEquals(testList.getList().get(1), testItem2);
     }
 
     @Test
     public void testRemoveItemNoItems() {
-        testItem = new Item("Guitar", 100, 50, 500);
         assertFalse(testList.removeItem("Jason"));
     }
 
     @Test
     public void testRemoveItemWithItem() {
-        testItem = new Item("Guitar", 100, 50, 500);
         Item itemTwo = new Item("Doll", 10, 5, 30);
         testList.addItem(testItem);
         testList.addItem(itemTwo);
 
         assertTrue(testList.removeItem("Doll"));
         assertEquals(1, testList.getList().size());
+        assertTrue(testList.removeItem("Guitar"));
+        assertEquals(0, testList.getList().size());
     }
 
     @Test
-    public void testGetFirstItem() {
-        testItem = new Item("Guitar", 100, 50, 500);
+    public void testGetFirstItemNoException() {
         Item itemTwo = new Item("Doll", 10, 5, 30);
         testList.addItem(testItem);
         testList.addItem(itemTwo);
 
-        assertEquals("Guitar", testList.getFirstItem().getName());
+        try {
+            testList.getFirstItem();
+            assertEquals(testList.getFirstItem(), testItem);
+        } catch (EmptyListException e) {
+            fail("Exception should not have been thrown here");
+        }
+    }
+
+    @Test
+    public void testGetFirstItemException() {
+        assertTrue(testList.getList().isEmpty());
+
+        try {
+            testList.getFirstItem();
+            fail("Exception should have been thrown");
+        } catch (EmptyListException e) {
+            // expected behaviour
+        }
     }
 }

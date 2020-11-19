@@ -1,6 +1,7 @@
 package ui;
 
 
+import exceptions.EmptyListException;
 import model.AuctioningList;
 import model.Item;
 import persistence.JsonReader;
@@ -89,7 +90,12 @@ public class AuctionHouse {
         } else if (command.equals("v")) {
             doViewList();
         } else if (command.equals("b")) {
-            doAuctionHouse();
+            try {
+                doAuctionHouse();
+            } catch (EmptyListException e) {
+                System.out.println("All items have had a chance to be auctioned!");
+                System.out.println("Total profit is: " + currentProfit);
+            }
         } else if (command.equals("s")) {
             saveList();
         } else if (command.equals("l")) {
@@ -168,30 +174,24 @@ public class AuctionHouse {
 
     // REQUIRES: auctioning list is non-empty
     // MODIFIES: this
-    // EFFECTS: begins the auction house
-    private void doAuctionHouse() {
+    // EFFECTS: begins the auction house. Throws EmptyListException when no items are in the auctioning list
+    private void doAuctionHouse() throws EmptyListException {
         System.out.println("Let's get it started, " + auctioningList.getName() + "!");
-        boolean keepGoing = true;
         String command;
 
-        while (keepGoing) {
-            if (auctioningList.getList().isEmpty()) {
-                System.out.println("All items have had a chance to be auctioned!");
-                System.out.println("Total profit is: " + currentProfit);
-                keepGoing = false;
-            } else {
-                currentItem = auctioningList.getFirstItem();
-                System.out.println("Current item for sale is: " + currentItem.getName());
-                System.out.println("Initial price is " + currentItem.getInitialPrice() + ". Bidding increments are "
-                        + currentItem.getBidIncrement() + ". Buyout price is " + currentItem.getBuyOut()
-                        + ". Current price is " + currentItem.getCurrentPrice());
-                System.out.println("Would you like to bid for this item? If yes, type 'bid'. Else type 'no'");
-                command = input.next();
-                command = command.toLowerCase();
-                processCommandWithItem(command, currentItem);
-            }
+        while (true) {
+            currentItem = auctioningList.getFirstItem();
+            System.out.println("Current item for sale is: " + currentItem.getName());
+            System.out.println("Initial price is " + currentItem.getInitialPrice() + ". Bidding increments are "
+                    + currentItem.getBidIncrement() + ". Buyout price is " + currentItem.getBuyOut()
+                    + ". Current price is " + currentItem.getCurrentPrice());
+            System.out.println("Would you like to bid for this item? If yes, type 'bid'. Else type 'no'");
+            command = input.next();
+            command = command.toLowerCase();
+            processCommandWithItem(command, currentItem);
         }
     }
+
 
     // MODIFIES: this, item
     // EFFECTS: process commands depending on keyword that are given by user

@@ -2,9 +2,11 @@ package model;
 
 // Represents the auctioning list that is used in the AuctionHouse.
 
+import exceptions.EmptyListException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
+import sun.invoke.empty.Empty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +40,14 @@ public class AuctioningList implements Writable {
         return false;
     }
 
-    // REQUIRES: list is non empty
     // EFFECTS: returns the first item on list
-    public Item getFirstItem() {
-        return list.get(0);
+    //          throws EmptyListException if the list is empty
+    public Item getFirstItem() throws EmptyListException {
+        if (list.isEmpty()) {
+            throw new EmptyListException();
+        } else {
+            return list.get(0);
+        }
     }
 
     // getters:

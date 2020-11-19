@@ -18,8 +18,7 @@ public class Item implements Writable {
     // REQUIRES: buyOut price is greater than initialPrice
     // EFFECTS: constructs an item with name, initial price, bid increments,
     //          and a buy out price. Begins with 0 bid count and current price is initial price
-    public Item(String name, double initialPrice, double bidIncrement,
-                double buyOut) {
+    public Item(String name, double initialPrice, double bidIncrement, double buyOut) {
         this.name = name;
         this.initialPrice = initialPrice;
         this.bidIncrement = bidIncrement;
