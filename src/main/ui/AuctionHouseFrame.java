@@ -30,6 +30,7 @@ public class AuctionHouseFrame extends JFrame implements ActionListener {
 
     // MODIFIES: this
     // EFFECTS: creates the AuctionHouseFrame and assigns this.list to list
+    //          throws EmptyListException when the auction can't begin because there are no items in the list.
     public AuctionHouseFrame(AuctioningList list) throws EmptyListException {
         currentItem = list.getFirstItem();
 
