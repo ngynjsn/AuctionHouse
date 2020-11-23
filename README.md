@@ -36,6 +36,10 @@ You must have one test for the case where the exception is expected and another 
 
 - Created an exception called EmptyListException which is thrown whenever a user is trying
 to retrieve an item from an empty list. This exception is thrown from model.AuctioningList in the method
-getFirstItem(). It is used in ui.AuctionHouse, ui.AuctionHouseFrame, and ui.AuctionHouseGUI for the purposes of:
+getFirstItem(). It is used in ui.AuctionHouseConsole, ui.AuctionHouseFrame, and ui.AuctionHouseGUI for the purposes of:
 ending the auction house when the list is empty and failing to start the auction house when attemping to start
-the auction house with no items. 
+the auction house with no items.
+
+**Phase 4: Task 3**
+- I feel that there isn't much to improve since I feel that there are enough classes to follow the Single Responsibility
+Principle and there isn't too many classes that clutters the project.

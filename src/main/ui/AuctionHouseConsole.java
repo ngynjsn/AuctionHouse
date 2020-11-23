@@ -14,7 +14,7 @@ import java.util.Scanner;
 // Auction house application that is used to begin adding items into an auction list, removing items, viewing items,
 // and can begin the auctioning process.
 
-public class AuctionHouse {
+public class AuctionHouseConsole {
     private static final String JSON_STORE = "./data/auctioninglist.json";
     private AuctioningList auctioningList;
     private Item currentItem;
@@ -24,7 +24,7 @@ public class AuctionHouse {
     private JsonReader jsonReader;
 
     // EFFECTS: constructor to run the auction house
-    public AuctionHouse() {
+    public AuctionHouseConsole() {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         runAuctionHouse();
@@ -32,7 +32,7 @@ public class AuctionHouse {
 
     // EFFECTS: constructor to help with tests
     //          creates an empty auctioning list
-    public AuctionHouse(String n) {
+    public AuctionHouseConsole(String n) {
         auctioningList = new AuctioningList(n);
     }
 

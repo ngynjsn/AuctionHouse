@@ -9,15 +9,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 // Test for AuctionHouse
 
-public class AuctionHouseTest {
+public class AuctionHouseConsoleTest {
 
     Item testItem;
     AuctioningList testList;
-    AuctionHouse testHouse;
+    AuctionHouseConsole testHouse;
 
     @BeforeEach
     public void setUp() {
-        testHouse = new AuctionHouse("Jason");
+        testHouse = new AuctionHouseConsole("Jason");
         testList = new AuctioningList("Jason's List");
         testItem = new Item("Guitar", 100, 50, 500);
     }

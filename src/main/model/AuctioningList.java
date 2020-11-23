@@ -6,7 +6,6 @@ import exceptions.EmptyListException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
-import sun.invoke.empty.Empty;
 
 import java.util.ArrayList;
 import java.util.List;

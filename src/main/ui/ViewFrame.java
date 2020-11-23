@@ -21,7 +21,6 @@ public class ViewFrame extends JFrame {
         add(mainPanel);
         setLocationRelativeTo(null);
         setTitle("Items");
-        setResizable(false);
         setVisible(true);
     }
 
