@@ -42,4 +42,5 @@ the auction house with no items.
 
 **Phase 4: Task 3**
 - I feel that there isn't much to improve since I feel that there are enough classes to follow the Single Responsibility
-Principle and there isn't too many classes that clutters the project.
+Principle and there isn't too many classes that clutters the project. In addition, all the classes seem to have a 
+meaningful and a clear purpose.
