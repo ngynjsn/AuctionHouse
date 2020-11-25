@@ -34,9 +34,10 @@ auctioning list.
 You must have at least one method that throws a checked exception.
 You must have one test for the case where the exception is expected and another where the exception is not expected.
 
-- Created an exception called EmptyListException which is thrown whenever a user is trying
-to retrieve an item from an empty list. This exception is thrown from model.AuctioningList in the method
-getFirstItem(). It is used in ui.AuctionHouseConsole, ui.AuctionHouseFrame, and ui.AuctionHouseGUI for the purposes of:
+- The robust class that I have designed and tested is the AuctioningList class in model. 
+Created an exception called EmptyListException which is thrown whenever a user is trying to retrieve an item from an
+empty list. This exception is thrown from model.AuctioningList in the method getFirstItem().
+It is used in ui.AuctionHouseConsole, ui.AuctionHouseFrame, and ui.AuctionHouseGUI for the purposes of:
 ending the auction house when the list is empty and failing to start the auction house when attemping to start
 the auction house with no items.
 
