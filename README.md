@@ -42,6 +42,8 @@ ending the auction house when the list is empty and failing to start the auction
 the auction house with no items.
 
 **Phase 4: Task 3**
-- I feel that there isn't much to improve since I feel that there are enough classes to follow the Single Responsibility
-Principle and there isn't too many classes that clutters the project. In addition, all the classes seem to have a 
-meaningful and a clear purpose.
+- There is a lot of coupling between AuctioningList and the other classes, so if I had more time, I would probably
+figure out a way to have less reliance on the AuctioningList and maybe introduce another class (perhaps abstract). Other
+than that, I feel that there isn't much to improve since I feel that there are enough classes to follow the Single 
+Responsibility Principle and there isn't too many classes that clutters the project. In addition, all the classes seem 
+to have a meaningful and a clear purpose.
